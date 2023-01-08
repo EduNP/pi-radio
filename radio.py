@@ -41,11 +41,12 @@ except:
 
 
 while True:
-    #os.system("killall vlc") #Kill VLC process
-    #os.system(f"vlc {stations[selectRadio]['url']}") #Open VLC process
-    os.system(f"start vlc {stations[selectRadio]['url']}")
+    os.system("killall vlc") #Kill VLC process
+    os.system(f"vlc {stations[selectRadio]['url']}") #Open VLC process
+
     print(stations[selectRadio]['nome'])
     print(stations[selectRadio]['url'])
+    
     #Salva radio selecionada
     with open(stationFile, "w") as file:
         file.write(f"{selectRadio}")
