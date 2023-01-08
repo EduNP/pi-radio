@@ -1,0 +1,20 @@
+[{
+    "nome":"Diario", 
+    "url": "https://rrdns-megasistema.webnow.com.br/diario.aac"
+},
+{
+    "nome":"Alpha normal", 
+    "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/ALPHAMPBAAC.aac?dist=site-alphampb"
+},
+{
+    "nome":"Rock 89", 
+    "url": "https://20843.live.streamtheworld.com/RADIO_89FM_ADP.aac?dist=site-89fm"
+},
+{
+    "nome":"MIX", 
+    "url": "https://26523.live.streamtheworld.com/MIXFM_SAOPAULOAAC.aac?dist=mix-web-player-radio-ao-vivo"
+},
+{
+    "nome":"Alpha MPB", 
+    "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/RADIO_ALPHAFM_ADP.aac?dist=site-alphafm"
+}]
