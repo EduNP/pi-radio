@@ -1,21 +1,52 @@
 import os
 import json
+import RPi.GPIO as GPIO
+import time
 
+#Get user's input and display led colors to give response 
 def getUserInput():
     while True:
-        #TODO
-        #Selecione uma radio:
+        #Select a station
+        #Led VERDE
+        GPIO.output(14,GPIO.LOW)
+        GPIO.output(15,GPIO.LOW)
+        GPIO.output(18,GPIO.HIGH)
+        time.sleep(0.5)
+
         selectedStation = input("Selecione")
         try:
             selectedStation = int(selectedStation)
             if selectedStation >= 0 and selectedStation < len(stations):
+                #Led Azul
+                GPIO.output(14,GPIO.LOW)
+                GPIO.output(15,GPIO.HIGH)
+                GPIO.output(18,GPIO.LOW)
+                time.sleep(0.5)
                 return selectedStation
             else:
+                #LED VERMELHO
+                GPIO.output(14,GPIO.HIGH)
+                GPIO.output(15,GPIO.LOW)
+                GPIO.output(18,GPIO.LOW)
+                time.sleep(2)
                 print("Estacao nao existe")
         except:
-            #Mensagem erro #TODO
+            #LED VERMELHO
+            GPIO.output(14,GPIO.HIGH)
+            GPIO.output(15,GPIO.LOW)
+            GPIO.output(18,GPIO.LOW)
+            time.sleep(2)
             print("Entrada invalida")
             continue
+#Led IO
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(14,GPIO.OUT) #Vermelho
+GPIO.setup(15,GPIO.OUT) #Azul
+GPIO.setup(18,GPIO.OUT) #Verde
+
+GPIO.output(14,GPIO.HIGH)
+GPIO.output(15,GPIO.LOW)
+GPIO.output(18,GPIO.LOW)
 
 #Files Names
 stationFile = "TEMP_STATION"
@@ -37,16 +68,12 @@ try:
     selectRadio = int(open(stationFile, "r").read())
 except:
     selectRadio = 0
-    print("caiu")
 
 
 while True:
     os.system("killall vlc") #Kill VLC process
-    os.system(f"vlc {stations[selectRadio]['url']}") #Open VLC process
+    os.system(f"cvlc {stations[selectRadio]['url']} > /dev/null &")#Open VLC process
 
-    print(stations[selectRadio]['nome'])
-    print(stations[selectRadio]['url'])
-    
     #Salva radio selecionada
     with open(stationFile, "w") as file:
         file.write(f"{selectRadio}")
